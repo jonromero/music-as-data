@@ -16,12 +16,21 @@
 
 (def hihat (.loadSample @*minim* "/home/darksun4/Sources/clj-processing/examples/data/HiHats1/hihat2.wav"))
 
-(doseq [i (range 5)]
-  (Thread/sleep 300)
-  (.trigger kick)
-  (Thread/sleep 300)  
-  (.trigger hihat)
-  (.trigger snare))
+(defmacro times [num expression]
+  ;; small tempo drums demo
+  `(doseq [i# (range ~num)]
+	~expression))
+
+;; Drum Demos
+(times 2 
+  (p (pattern [kick (+ hihat snare)],2)))
+
+(times 4
+	   (p (pattern [kick (+ hihat snare) [kick kick] (+ hihat snare)],3)))
+
+(times 4
+	   (p (pattern [kick (+ hihat snare) [kick kick] (+ hihat snare)],3)))
+
 
 (ns examples.music
   (:import [ddf.minim Minim AudioOutput AudioSample]
@@ -46,15 +55,36 @@
   (.trigger (:data sample)))
 
 
-(defrecord Melement [volume pitch duration chord? play-fn data])
+(defrecord Melement [volume pitch duration play-fn data])
 
 (defmacro defsample [sample sample-path]
   `(def ~sample
-		(Melement. 50 (float 1.0) (float 1.0) false play-sample
+		(Melement. 50 (float 1.0) (float 1.0) play-sample
 				   (.loadSample @*minim* (str *samples-path* '~sample-path)))))
 
 (defmacro defnote [n-name]
-  `(def ~n-name (Melement. 50 (float 1.0) (float 1.0) false play-note (str '~n-name))))
+  `(def ~n-name (Melement. 50 (float 1.0) (float 1.0) play-note (str '~n-name))))
+
+
+(defn- play-chord
+  "Executes the play-funcs of of all elements"
+  [chord-elements]
+  (doseq [element (:data chord-elements)]
+	(play-element element)))
+
+
+(defn join [& notes]
+  (Melement. 0 0 0 true play-chord
+			 (first (conj [] notes))))
+
+(defn play-element [element]
+  ((:play-fn element) element))
+
+
+
+(defmacro + [& more]
+  ;; make chords like (+ kick hihat)
+  `(join ~@more))
 
 
 ;; Notes
@@ -87,42 +117,33 @@
 ;; Drum demo
 (p (pattern [kick kick hihat [kick kick] [kick kick] [kick kick] hihat], 4))
 
+;; Working example
+;; (p (pattern [kick (+ hihat snare) kick],2))
+(defn show-properties [prop pattern]
+  (map #(prop %)
+	   pattern))
 
-
-;; this need fixing
-;;(p (pattern [kick [+ hihat snare] kick]))
 
 (defn calc-duration [elements duration count]
   (map #(pattern % (/ duration count))
 	   elements))
 
-(defn is-chord? [elements]
-  (if (= (:name (meta (first elements))) '+)
-	true
-	false))
 
-;; Needs a lot of clean-up
+;; Maybe a reduce could clean it up more?
 (defn pattern
   ([m-element] (pattern m-element 1))
   ([m-element duration]
 	 (if (= (type []) (type m-element))
-	    (let [element-count (if (is-chord? m-element)
-							  1
-							  (count m-element))
-			  elements (if (is-chord? m-element)
-						 (map #(assoc % :chord? true)
-							  (rest m-element))
-						 m-element)]
-		  (flatten
-		   (calc-duration elements duration element-count)))
+	   (flatten
+		(calc-duration m-element duration (count m-element)))
 		(assoc m-element :duration duration))))
 
-(defn p [m-elements]
-  (doseq [element m-elements]
-	((:play-fn element) element)
-	(prn (:chord? element))
-	(when (not (:chord? element))
-	  (Thread/sleep (* (:duration element) 500)))))
+
+(defn p
+  [elements]
+  (doseq [element elements]
+	(play-element element)
+	(Thread/sleep (* (:duration element) 500))))
 
 
 (defn bpm [pattern tempo-num]
@@ -138,10 +159,6 @@
   (swap! *sine* (fn [sine]
 				  (SquareWave. 440 0.5 (.sampleRate @*outp*)))))
 
-	(smooth)
-	(no-stroke)
-	(fill 226)
-	(framerate 10)))
 
 
 (defn draw []
