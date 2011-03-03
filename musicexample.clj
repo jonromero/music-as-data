@@ -22,6 +22,8 @@
 
 (def *minim* (atom nil))
 (def *outp* (atom nil))
+(def *sine* (atom nil))
+
 (def *samples-path* "/home/darksun4/Sources/clj-processing/examples/data/")
 (def *pattern* (atom []))
 
@@ -43,7 +45,7 @@
 		(Melement. 50 (float 1.0) (float 1.0) play-sample
 				   (.loadSample @*minim* (str *samples-path* '~sample-path)))))
 
-(defmacro defnote [n-name]
+(defmacro defmidi-note [n-name]
   `(def ~n-name (Melement. 50 (float 1.0) (float 1.0) play-note (str '~n-name))))
 
 
@@ -68,18 +70,18 @@
   `(join ~@more))
 
 ;; Notes
-(defnote A)
-;;(defnote B)
-;;(defnote C)
-;;(defnote D)
-;;(defnote E)
-;;(defnote F)
-;;(defnote G)
-;;(defnote E3)
-;;(defnote G3)
-;;(defnote B3)
-;;(defnote E4)
-;;(defnote _)
+(defmidi-note A)
+;;(defmidi-note B)
+;;(defmidi-note C)
+;;(defmidi-note D)
+;;(defmidi-note E)
+;;(defmidi-note F)
+;;(defmidi-note G)
+;;(defmidi-note E3)
+;;(defmidi-note G3)
+;;(defmidi-note B3)
+;;(defmidi-note E4)
+;;(defmidi-note _)
 (def _ (Melement. 50 1.0 nil (fn[x] nil) "_"))
 
 
@@ -92,6 +94,9 @@
   (map #(prop %)
 	   pattern))
 
+
+
+(defn calc-duration [elements duration count])
 
 ;; Maybe a reduce could clean it up more?
 (defn pattern
@@ -123,7 +128,10 @@
   "Runs once."
   (swap! *minim* (fn [minim] (Minim. *applet*)))
   (swap! *outp* (fn [out]
-				  (.getLineOut @*minim*))))
+				  (.getLineOut @*minim*)))
+  (swap! *sine* (fn [out]
+				  (new SineWave 440 1 (.sampleRate @*outp*)))))
+
 
 (defn draw []
   (background-float 124))
@@ -152,7 +160,7 @@
 
 (keep-looping)
 
-;; tron
+;; EXAMPLE: tron
 ;;http://www.newgrounds.com/audio/listen/379726
 (p (pattern [kick kick kick kick snare kick kick kick], 3))
 (times 8
@@ -169,27 +177,6 @@
 (times 4
 	   (p (pattern [kick (+ hihat snare) [kick kick kick kick] kick kick kick kick (+ hihat snare)],3)))
 
-
-(defn play-signal [signal]
-  (.setFreq (:data signal) (:pitch signal))  
-  (.addSignal @*outp*
-			  (:data signal))
-  (Thread/sleep (* (:duration signal) 500))	
-  (.removeSignal @*outp*
-				 (:data signal)))
-
-(defmacro defsignal [signal-name Signal]
-  `(def ~signal-name
-		(Melement. 50 (float (get-note-freq ~signal-name)) (float 1) play-signal (new ~Signal 440 1 (.sampleRate (.getLineOut @*minim*))))))
-
-(defsignal mysin SquareWave)
-(defsignal mysine SineWave)
-
-(defn setFreq [signal freq]
-  (assoc signal :pitch freq))
-
-;;(p (pattern [kick A5 Bb5]))
-;;(sig sin [A B C D])
 
 (defmacro get-note-freq
   "Converts Ab4 to notes: A b 4 and return frequency"
@@ -218,6 +205,110 @@
 		  (= \# (:half sig-note)) 1.0594
 		  (= \b (:half sig-note)) -1.0594))
    (Math/pow 2 (Integer/parseInt (str (:scale sig-note))))))
+
+(defn setFreq [signal freq]
+  (assoc signal :pitch freq))
+
+(defn play-signal [signal]
+  (.setFreq (:data signal) (:pitch signal))  
+  (.addSignal @*outp*
+			  (:data signal))
+  (Thread/sleep (* (:duration signal) 500))	
+  (.removeSignal @*outp*
+				 (:data signal)))
+
+(defmacro defnote [note-name global-signal]
+  `(def ~note-name
+		(Melement. 50 (float (get-note-freq ~note-name)) (float 1) play-signal ~global-signal)))
+
+;; EXAMPLE: nothing else matters
+(times 8 (p (pattern [E4 G4 B4 E5 B4 G4], 3)))
+
+;; EXAMPLE: fun
+(times 1 (p (map #(assoc % :pitch (.nextInt (java.util.Random.) 1100)) (pattern [E4 G4 B4 E5 B4 G4], 5))))
+
+;; Lets do this - Refactored to be cheap
+;; TODO: write a macro for this
+(defnote A0 @*sine*)
+(defnote A1 @*sine*)
+(defnote A2 @*sine*)
+(defnote A3 @*sine*)
+(defnote A4 @*sine*)
+(defnote A5 @*sine*)
+(defnote A6 @*sine*)
+(defnote A7 @*sine*)
+
+(defnote B0 @*sine*)
+(defnote B1 @*sine*)
+(defnote B2 @*sine*)
+(defnote B3 @*sine*)
+(defnote B4 @*sine*)
+(defnote B5 @*sine*)
+(defnote B6 @*sine*)
+(defnote B7 @*sine*)
+
+(defnote C0 @*sine*)
+(defnote C1 @*sine*)
+(defnote C2 @*sine*)
+(defnote C3 @*sine*)
+(defnote C4 @*sine*)
+(defnote C5 @*sine*)
+(defnote C6 @*sine*)
+(defnote C7 @*sine*)
+
+(defnote D0 @*sine*)
+(defnote D1 @*sine*)
+(defnote D2 @*sine*)
+(defnote D3 @*sine*)
+(defnote D4 @*sine*)
+(defnote D5 @*sine*)
+(defnote D6 @*sine*)
+(defnote D7 @*sine*)
+
+(defnote E0 @*sine*)
+(defnote E1 @*sine*)
+(defnote E2 @*sine*)
+(defnote E3 @*sine*)
+(defnote E4 @*sine*)
+(defnote E5 @*sine*)
+(defnote E6 @*sine*)
+(defnote E7 @*sine*)
+
+(defnote F0 @*sine*)
+(defnote F1 @*sine*)
+(defnote F2 @*sine*)
+(defnote F3 @*sine*)
+(defnote F4 @*sine*)
+(defnote F5 @*sine*)
+(defnote F6 @*sine*)
+(defnote F7 @*sine*)
+
+(defnote G0 @*sine*)
+(defnote G1 @*sine*)
+(defnote G2 @*sine*)
+(defnote G3 @*sine*)
+(defnote G4 @*sine*)
+(defnote G5 @*sine*)
+(defnote G6 @*sine*)
+(defnote G7 @*sine*)
+
+;; FIXME
+(defmacro create-notes [global-signal start end]
+  `(for [scale# (range ~start ~end)]
+	 (defnote (symbol (str scale#)) ~global-signal)))
+
+(defnote A4 @*sine*)
+
+(defsignal mysine SineWave)
+
+(defsignal A0 SquareWave)
+(defsignal A4 SquareWave)
+
+
+
+;;(p (pattern [kick A5 Bb5]))
+;;(sig sin [A B C D])
+
 	  
 
 
