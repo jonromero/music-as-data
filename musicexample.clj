@@ -225,7 +225,7 @@
 (times 8 (p (pattern [E4 G4 B4 E5 B4 G4], 3)))
 
 ;; EXAMPLE: fun
-(times 1 (p (map #(assoc % :pitch (.nextInt (java.util.Random.) 1100)) (pattern [E4 G4 B4 E5 B4 G4], 5))))
+(times 5 (p (map #(assoc % :pitch (.nextInt (java.util.Random.) 1100)) (pattern [E4 G4 B4 E5 B4 G4], 1))))
 
 ;; Lets do this - Refactored to be cheap
 ;; TODO: write a macro for this
