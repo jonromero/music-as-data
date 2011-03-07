@@ -1,6 +1,0 @@
-(ns music-as-data.globals)
-
-(def *minim* (atom nil))
-(def *outp* (atom nil))
-(def *sine* (atom nil))
-(def *pattern* (atom []))
