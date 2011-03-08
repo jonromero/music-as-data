@@ -5,16 +5,12 @@
   (:import [ddf.minim Minim]
 		   [ddf.minim.signals SquareWave]
 		   [ddf.minim.signals SineWave])
-  (:use [rosado.processing.applet])
+  (:use [rosado.processing]
+		[rosado.processing.applet])
   (:use [music-as-data.mad]
 		[music-as-data.elements]
-		[music-as-data.globals]))
-
-;;(defsample kick "KickDrums1/kickdrum6.wav")
-(defsample kick2 "KickDrums4/kickdrum154.wav")
-;;(defsample snare "SnareDrums1/snaredrum2.wav")
-(defsample snare2 "DistortedSnares2/distortedsnare52.wav")
-(defsample hihat "HiHats1/hihat2.wav")
+		[music-as-data.globals]
+		[music-as-data.signalsnotes]))
 
 
 (defn setup []
@@ -22,11 +18,8 @@
   (swap! *minim* (fn [minim] (Minim. *applet*)))
   (swap! *outp* (fn [out]
 				  (.getLineOut @*minim*)))
-  (swap! *outp* (fn [out]
-						(.getLineOut @*minim*)))
   (swap! *sine* (fn [out]
 				  (new SineWave 440 1 (.sampleRate @*outp*)))))
-
 
 (defn draw []
   (background-float 124))
@@ -40,5 +33,13 @@
 (defn end [applet]
   (stop applet))
 
-;;(p)
-;;(play!)
+;; Create notes and load samples
+;; after system started
+(create-notes)
+
+;;(defsample kick "KickDrums1/kickdrum6.wav")
+(defsample kick2 "KickDrums4/kickdrum154.wav")
+;;(defsample snare "SnareDrums1/snaredrum2.wav")
+(defsample snare2 "DistortedSnares2/distortedsnare52.wav")
+(defsample hihat "HiHats1/hihat2.wav")
+

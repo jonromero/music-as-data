@@ -1,3 +1,7 @@
+(ns music-as-data.signals
+  (:use [music-as-data.globals]
+		[music-as-data.elements]))
+
 (defmacro get-note-freq
   "Converts Ab4 to notes: A b 4 and return frequency"
   [snote]
