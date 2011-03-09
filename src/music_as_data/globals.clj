@@ -9,5 +9,6 @@
 (def *outp* (atom nil))
 (def *sine* (atom nil))
 (def *pattern* (atom []))
+(def *recorder* (atom []))
 
 

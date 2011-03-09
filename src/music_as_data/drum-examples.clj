@@ -8,7 +8,7 @@
 (p (pattern [E4 E4 E4 E4 E4],2.5))
 
 ;; Drum Demos
-(times 8 
+(times 2
   (p (pattern [kick (+ hihat snare)],2)))
 (times 4
 	   (p (pattern [kick (+ hihat snare) [kick kick] (+ hihat snare)],3)))
