@@ -1,4 +1,4 @@
-# Live Programming Music Language in Clojure #
+# A language for live programming music in Clojure #
 
 Music as Data (MAD) is a live programming language/environment based on Processing.org written in Clojure.
 MAD lets you treat music as data and apply data transformation on the fly so you can experiment with notes and
@@ -17,18 +17,18 @@ Play two samples (or notes):
 Each sample is being played on one time.
 
 If you want to play a sample on the same time:
-   (play! [kick (+snare hihat)])	
+   	   (play! [kick (+snare hihat)])	
 
 This will play kick on one time and snare+hihat on another.
 
 You can also play triplets:
-	(play! [kick [snare snare snare]])
+		(play! [kick [snare snare snare]])
 
 Now kick will be on one time and for the same duration, you'll have three snare.
 
 
 Of course you can play notes:
-   (play! [A4 B4 D#5])
+      (play! [A4 B4 D#5])
 
 Mix, notes and samples:
 	 (play! [hihat A4 kick G6])
