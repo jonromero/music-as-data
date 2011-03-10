@@ -7,7 +7,7 @@ samples.
 
 You can see (and hear) examples at http://mad.emotionull.com
 
-The documentation still lacks a lot of stuff but I am working on it.
+The documentation still lacks a lot of stuff, so this is NOT for the faint-hearted.
 
 # Example #
  
@@ -49,6 +49,37 @@ Now, instead of using play! (which plays samples in a loop - perfect for buildin
 you can create a pattern and then run it only for once using the p function. 
 The advantage is that you can manipulate data and their properties thus mess around with note frequences,
 tempo, scaling whatever.
+
+
+# How to use #
+First of all, don't run lein deps. All libraries and samples are included (bad bad bad).
+Change the globals.clj into the path where samples are (so you can have drum sets).
+
+Then, start your repl (lein swank) and go to core.clj.
+
+Compile core.clj and 
+
+		(start main)
+
+Don't close the window that will pop-up. This is the processing window (so you can have graphics too!).
+After that, run
+
+	  (create-notes)
+
+and you are ready to start playing!
+
+
+	(p (pattern [A4 A2]))
+
+	(p (pattern [kick snare (+ hihat snare)]))
+
+You can have it playing on a loop by executing:
+	(keep-looping)
+
+and then:
+
+	(play! [A4])
+	(play! [C5])
 
 
 # Building #

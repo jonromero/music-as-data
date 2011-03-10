@@ -38,14 +38,20 @@
   (stop applet))
 
 
- ;; Create notes and load samples
+;; Run this AFTER you have started the system
+;; using (start main)
+
+;; Create notes and load samples
 ;; after system started
-(create-notes)
 
-(defsample kick "KickDrums1/kickdrum6.wav")
-(defsample kick2 "KickDrums4/kickdrum154.wav")
-(defsample snare "SnareDrums1/snaredrum2.wav")
-(defsample snare2 "DistortedSnares2/distortedsnare52.wav")
-(defsample hihat "HiHats1/hihat2.wav")
+;;(create-notes)
 
-(keep-looping)
+;;(defsample kick "KickDrums1/kickdrum6.wav")
+;;(defsample kick2 "KickDrums4/kickdrum154.wav")
+;;(defsample snare "SnareDrums1/snaredrum2.wav")
+;;(defsample snare2 "DistortedSnares2/distortedsnare52.wav")
+;;(defsample hihat "HiHats1/hihat2.wav")
+
+;;(p (pattern (A4)))
+;;(play! [A4 B4])
+;;(keep-looping)
