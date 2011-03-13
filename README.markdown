@@ -52,12 +52,11 @@ tempo, scaling whatever.
 
 
 # How to use #
-First of all, don't run lein deps. All libraries and samples are included (bad bad bad).
-Change the globals.clj into the path where samples are (so you can have drum sets).
+First, build the project (see Building). Some examples are included and I would be happy to include any of yours.
+Also, you must use emacs (at least until someone sends me alternative ways of starting and using the REPL).
 
-Then, start your repl (lein swank) and go to core.clj.
-
-Compile core.clj and 
+Then, start your repl (lein swank) and go to core.clj .
+Go inside emacs, run slime-connect, go to the core namespace, select everything and press CTRL+C, CTRL+R to compile the selection. After that, you have a REPL with libraries included and system are ready to go! Just run:
 
 		(start main)
 
@@ -67,7 +66,6 @@ After that, run
 	  (create-notes)
 
 and you are ready to start playing!
-
 
 	(p (pattern [A4 A2]))
 
@@ -83,7 +81,6 @@ and then:
 
 
 # Building #
-Still cleaning up the repository from deps, so some jars might not be inside project.clj yet.
 
     lein deps
 
@@ -91,3 +88,10 @@ Still cleaning up the repository from deps, so some jars might not be inside pro
 # Authors #
 
 Designed and developed by Jon Vlachoyiannis (http://jon.is.emotionull.com).
+
+# Thanks #
+
+@mar_nas (for the incredible site mad.emotionull.com)
+https://github.com/rosado (for clj-processing)
+http://processing.org ('cause it rocks)
+http://code.compartmental.net/tools/minim/ (for the AWESOME sound system)
