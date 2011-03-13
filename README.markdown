@@ -92,6 +92,10 @@ Designed and developed by Jon Vlachoyiannis (http://jon.is.emotionull.com).
 # Thanks #
 
 @mar_nas (for the incredible site mad.emotionull.com)
+
 https://github.com/rosado (for clj-processing)
+
 http://processing.org ('cause it rocks)
+
 http://code.compartmental.net/tools/minim/ (for the AWESOME sound system)
+
