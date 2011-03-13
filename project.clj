@@ -1,5 +1,5 @@
-(defproject org.clojars.automata/rosado.processing "1.1.0"
-  :description "A Live Programming Music REPL using processing"
+(defproject music-as-data "0.6.0"
+  :description "A Live Programming Language in Clojure using processing"
   :url "http://mad.emotionull.com"
   :dependencies [[org.clojure/clojure "1.2.0"]
                  [org.clojars.fyuryu/processing.core "1.1.0"]]

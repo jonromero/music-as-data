@@ -1,0 +1,2 @@
+(times 4 (p (pattern [[E4 G4 E4] [E5 B4 G4 D4 A4 E4 G4 A4]], 2)))
+
