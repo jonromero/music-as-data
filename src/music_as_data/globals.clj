@@ -1,6 +1,6 @@
 (ns music-as-data.globals)
 
-(def *samples-path* "/home/darksun4/Sources/clj-processing/examples/data/")
+(def *samples-path* "samples/")
 
 (defn get-samples-path []
   *samples-path*)
