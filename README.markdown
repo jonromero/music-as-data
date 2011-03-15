@@ -53,10 +53,19 @@ tempo, scaling whatever.
 
 # How to use #
 First, build the project (see Building). Some examples are included and I would be happy to include any of yours.
-Also, you must use emacs (at least until someone sends me alternative ways of starting and using the REPL).
+If you don't use emacs, you can try this one:
 
-Then, start your repl (lein swank) and go to core.clj .
-Go inside emacs, run slime-connect, go to the core namespace, select everything and press CTRL+C, CTRL+R to compile the selection. After that, you have a REPL with libraries included and system are ready to go! Just run:
+   lein compile
+   lein repl
+   clj=> (require 'music-as-data.core)
+   clj=> (in-ns 'music-as-data.core)
+
+and keep reading after the emacs block.
+
+If you use emacs, start your repl (lein swank) and go to core.clj .
+Go inside emacs, run slime-connect, go to the core namespace, select everything and press CTRL+C, CTRL+R to compile the selection. 
+
+After you have access to a REPL you are ready to go! Just run:
 
 		(start main)
 
@@ -79,6 +88,10 @@ and then:
 	(play! [A4])
 	(play! [C5])
 
+In order to play a pause, you can play the _ note:
+
+   (play! [A4 _ A4])
+
 
 # Building #
 
@@ -99,3 +112,4 @@ http://processing.org ('cause it rocks)
 
 http://code.compartmental.net/tools/minim/ (for the AWESOME sound system)
 
+zero (for how to use it without emacs)
