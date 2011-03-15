@@ -55,10 +55,10 @@ tempo, scaling whatever.
 First, build the project (see Building). Some examples are included and I would be happy to include any of yours.
 If you don't use emacs, you can try this one:
 
-   lein compile
-   lein repl
-   clj=> (require 'music-as-data.core)
-   clj=> (in-ns 'music-as-data.core)
+      lein compile
+   	  lein repl
+	  clj=> (require 'music-as-data.core)
+	  clj=> (in-ns 'music-as-data.core)
 
 and keep reading after the emacs block.
 
