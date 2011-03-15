@@ -90,7 +90,7 @@ and then:
 
 In order to play a pause, you can play the _ note:
 
-   (play! [A4 _ A4])
+      (play! [A4 _ A4])
 
 
 # Building #
