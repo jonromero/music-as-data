@@ -6,8 +6,8 @@
   (:import (processing.core PApplet PImage PGraphics PFont))
   (:use [music-as-data.globals]
 		[music-as-data.mfunctions])
-  (:use [rosado.processing]
-        [rosado.processing.applet]))
+  (:use [quil.core]
+        [quil.applet]))
 
 
 (defn p
@@ -27,7 +27,6 @@
 	   (flatten
 		(calc-duration m-element duration (count m-element)))
 		(assoc m-element :duration duration))))
-
 
 (defn calc-duration [elements duration count]
   (map #(pattern % (/ duration count))

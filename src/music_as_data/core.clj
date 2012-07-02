@@ -1,24 +1,24 @@
 ;; Jon Vlachoyiannis 07/03/2011
 ;; jon@emotionull.com
-
 (ns music-as-data.core
   (:import [ddf.minim Minim]
 		   [ddf.minim.signals SquareWave]
 		   [ddf.minim AudioInput]
 		   [ddf.minim AudioOutput]
 		   [ddf.minim.signals SineWave])
-  (:use [rosado.processing]
-		[rosado.processing.applet])
+  (:use [quil.core]
+        [quil.applet]
+        [quil.dynamics])
   (:use [music-as-data.mad]
 		[music-as-data.elements]
 		[music-as-data.globals]
 		[music-as-data.record]
-		[music-as-data.semantics]
+                [music-as-data.semantics]
 		[music-as-data.signalsnotes]))
 
 (defn setup []
   "Runs once."
-  (swap! *minim* (fn [minim] (Minim. *applet*)))
+  (swap! *minim* (fn [minim] (Minim. applet)))
   (swap! *outp* (fn [out]
 				  (.getLineOut @*minim*)))
   (swap! *sine* (fn [out]
@@ -32,10 +32,10 @@
   :setup setup :draw draw :size [200 200])
 
 (defn start [applet]
-  (run applet))
+  (applet-start applet))
 
 (defn end [applet]
-  (stop applet))
+  (applet-exit applet))
 
 
 ;; Run this AFTER you have started the system
