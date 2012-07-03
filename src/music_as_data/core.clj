@@ -13,12 +13,12 @@
 		[music-as-data.elements]
 		[music-as-data.globals]
 		[music-as-data.record]
-                [music-as-data.semantics]
+                [music-as-data.mfunctions]
 		[music-as-data.signalsnotes]))
 
 (defn setup []
   "Runs once."
-  (swap! *minim* (fn [minim] (Minim. applet)))
+  (swap! *minim* (fn [minim] (Minim. (current-applet))))
   (swap! *outp* (fn [out]
 				  (.getLineOut @*minim*)))
   (swap! *sine* (fn [out]
