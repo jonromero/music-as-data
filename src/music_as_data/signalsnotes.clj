@@ -1,8 +1,7 @@
 (ns music-as-data.signalsnotes
   (:use [music-as-data.signals]
-		[music-as-data.globals]))
-
-(defrecord Melement [volume pitch duration play-fn data])
+        [music-as-data.globals])
+  (:import [music_as_data.elements Melement]))
 
 (defn create-notes []
   ;; FIXME - macro here!

@@ -23,7 +23,7 @@ Each sample is being played at one time.
 
 
 If you want to play a sample at the same time:
-   	   (play! [kick (+snare hihat)])	
+   	   (play! [kick (chord snare hihat)])	
 
 This will play kick at one time and snare+hihat at another.
 
@@ -78,7 +78,7 @@ and you are ready to start playing!
 
 	(p (pattern [A4 A2]))
 
-	(p (pattern [kick snare (+ hihat snare)]))
+	(p (pattern [kick snare (chord hihat snare)]))
 
 You can have it playing on a loop by executing:
 	(keep-looping)
@@ -101,6 +101,8 @@ In order to play a pause, you can play the _ note:
 # Authors #
 
 Designed and developed by Jon Vlachoyiannis (http://jon.is.emotionull.com).
+
+
 
 # Thanks #
 
