@@ -40,7 +40,7 @@
 
 ;; Run this AFTER you have started the system
 ;; using
-(start main)
+;;(start main)
 
 ;; Create notes and load samples
 ;; after system started
@@ -53,7 +53,7 @@
 ;;(defsample snare2 "DistortedSnares2/distortedsnare52.wav")
 (defsample hihat "HiHats1/hihat2.wav")
 
-(p (pattern [A4]))
+;(p (pattern [A4]))
 
 ;;(play! [A4 B4])
 ;;(keep-looping)

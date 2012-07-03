@@ -9,8 +9,7 @@
 			 (first (conj [] notes))))
 
 ;; Maybe defmulti?
-;; + is causing an NPE!
-;;(defmacro + [& more]
-;; make chords like (+ kick hihat)
-;;`(join ~@more))
+(defmacro chord [& more]
+;; make chords like (chord kick hihat)
+ `(join ~@more))
 
