@@ -9,8 +9,8 @@
 
 ;; Drum Demos
 (times 2
-  (p (pattern [kick (+ hihat snare)],2)))
+  (p (pattern [kick (chord hihat snare)],2)))
 (times 4
-	   (p (pattern [kick (+ hihat snare) [kick kick] (+ hihat snare)],3)))
+	   (p (pattern [kick (chord hihat snare) [kick kick] (chord hihat snare)],3)))
 (times 4
-	   (p (pattern [kick (+ hihat snare) [kick kick kick kick] kick kick kick kick (+ hihat snare)],3)))
+	   (p (pattern [kick (chord hihat snare) [kick kick kick kick] kick kick kick kick (chord hihat snare)],3)))
