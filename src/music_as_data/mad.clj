@@ -59,26 +59,3 @@
         (when-let [flat (get NOTES (keyword (str n-char "b")))]
           (defnote (symbol (str n-char "b" octave))
                    (octave-note octave flat)))))))
-
-;;(def derezzed [[E4 G4 E4] [E5 B4 G4 D4 A4 E4 G4 A4]])
-
-; run this to play the pattern
-;(p (pattern derezzed 2))
-
-; or this to play it forever
-;(p (cycle (pattern derezzed 2)))
-
-; before you stop, add some reverb
-;(inst-fx tone fx-reverb)
-
-; call stop to kill the loop
-;(stop)
-
-; try it slow with an echo effect
-;(inst-fx tone fx-echo)
-;(p (cycle (pattern derezzed 6)))
-
-; clear the fx for this instrument like so
-;(clear-fx tone)
-
-;;(stop)
