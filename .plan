@@ -1,6 +1,12 @@
--> 0.7
-+ Working on orchistrator
+
+## Development
++ Orchistrator
+
+## Language specification
++ Sending to different output (https://github.com/overtone/overtone/wiki/Multi-channel-expansion%2C-stereo-and-panning)
 + Filters/effects should be M.A.D
 + Beat slicing
+
+## Other
 + First experiments for the album (Beat me up Scotty)
 + Make M.A.D a jar
