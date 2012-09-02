@@ -38,7 +38,7 @@
 
 
 (definst dubstep [freq 100 wobble-freq 2 dur 0.4]
-  (let [sweep (lin-exp (lf-saw wobble-freq) -1 1 40 5000)
+  (let [sweep (lin-exp (lf-saw (+ (line 1 40 5) wobble-freq)) -1 1 10 5000)
         env (env-gen (perc 0.01 dur) :action FREE)
         son   (mix (saw (* freq [0.99 1 1.01])))]
     (* env (lpf son sweep))))
@@ -120,21 +120,44 @@
 (clear-fx drums-doup)
 (clear-fx drums-pap)
 
-(p (cycle (pattern [doup pap] 2.3)))
+(p (cycle (pattern [doup pap] 1)))
 (demo (bpf (play-buf 1 flute-buf (line 0.1 0.3 5)) (line 1 1600)))
 
 (p (pattern [wob (assoc wob :pitch 1600)] 2))
 
 (inst-fx! tone fx-reverb)
+(inst-fx! tone fx-distortion2)
+(clear-fx tone)
 
-(p (cycle (pattern [A3 B4 B#4 B4])))
+(defn dub-note [n]
+  {:synth dubstep
+   :vol 10
+   :pitch (midi->hz (note n))
+   :dur 4})
+
+(p (cycle (pattern [(dub-note :a3)
+                    (dub-note :b4)
+                    (dub-note :b#4)
+                    (dub-note :b4)] 10)))
+
+(stop)
+
+
+(defn sword [n-sym your-inst pitch vol dur]
+  (intern *ns* (symbol n-sym)
+          {:synth your-inst
+           :vol vol
+           :pitch pitch
+           :dur dur}))
+
 
 (dubstep (midi->hz (note :a3)))
 (dubstep (midi->hz (note :b4)))
 (dubstep (midi->hz (note :b#4)))
 (dubstep (midi->hz (note :b4)))
 
-(stop)
+;;http://soundcloud.com/skipcloud/157-miles
+
 
 
 (sword "the-kick" tone 440 50 0)
