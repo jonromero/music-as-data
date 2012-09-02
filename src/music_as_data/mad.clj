@@ -5,11 +5,6 @@
   (:use [overtone.live]
         [overtone.inst.synth]))
 
-(definst tone [note 60 amp 0.3 dur 0.4]
-  (let [snd (sin-osc (midicps note))
-        env (env-gen (perc 0.01 dur) :action FREE)]
-    (* env snd amp)))
-
 (defn p
   ([elements]
    (p elements (now)))

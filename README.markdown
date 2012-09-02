@@ -11,6 +11,12 @@ You can see (and hear) examples at http://mad.emotionull.com
 
 The documentation still lacks a lot of stuff, so this is NOT for the faint-hearted.
 
+## TODOs for version 0,7
+This is a work-in-progress integration with Overtone and adding a global orchistrator.
+
+The concept is that if you need to be able to add notes and phrases as the system plays.
+
+
 ## Quick Start
 
 ### Installation
@@ -121,7 +127,6 @@ b
 # Authors #
 
 Designed and developed by Jon Vlachogiannis (http://jon.is.emotionull.com).
-
 
 
 # Thanks #

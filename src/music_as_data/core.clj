@@ -13,5 +13,5 @@
   []
   :ok)
 
-;;(def derezzed [[E4 G4 E4] [E5 B4 G4 D4 A4 E4 G4 A4]])
-;;(p (pattern derezzed 2))
+(def derezzed [[E4 G4 E4] [E5 B4 G4 D4 A4 E4 G4 A4]])
+(p (pattern derezzed 2))
