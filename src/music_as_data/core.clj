@@ -120,7 +120,6 @@
 (clear-fx drums-doup)
 (clear-fx drums-pap)
 
-(p (cycle (pattern [doup pap] 1)))
 (demo (bpf (play-buf 1 flute-buf (line 0.1 0.3 5)) (line 1 1600)))
 
 (p (pattern [wob (assoc wob :pitch 1600)] 2))
@@ -138,7 +137,11 @@
 (p (cycle (pattern [(dub-note :a3)
                     (dub-note :b4)
                     (dub-note :b#4)
-                    (dub-note :b4)] 10)))
+                    (dub-note :b4)] 5)))
+
+(demo (bpf (play-buf 1 flute-buf (line 0.1 0.3 5)) (line 1 1600)))
+
+(p (cycle (pattern [doup pap] 5)))
 
 (stop)
 
@@ -167,3 +170,28 @@
 (p (pattern [wob]))
 
 (p (pattern [(assoc wob :pitch 500)]))
+
+(defsynth kick [amp 0.5 decay 0.6 freq 65]
+  (let [env (env-gen (perc 0 decay) 1 1 0 1 FREE)
+        snd (sin-osc freq (* Math/PI 0.5) amp)]
+    (out 0 (pan2 (* snd env) 0))))
+
+
+(definst a-kick [freq 65 amp 0.5 decay 0.6]
+  (* (sin-osc freq (* Math/PI 1.5) 0.5)
+     (env-gen (perc 0 0.6) 1 1 0 1 FREE)))
+
+(sword "kick" a-kick 65 65 0)
+(sword "bkick" a-kick 452 65 0)
+
+
+(p (pattern [kick bkick [kick kick kick kick kick kick] bkick]))
+
+(def a [kick bkick [kick kick] bkick])
+
+(def b [kick [bkick [bkick bkick bkick] bkick ] [kick kick] bkick])
+
+(p (pattern a, 2))
+(p (pattern b, 2))
+
+(stop)
