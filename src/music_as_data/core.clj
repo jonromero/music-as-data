@@ -18,8 +18,18 @@
 
 (defn -main []
   (create-notes)
-  (p (pattern [A4 A2]))
+  ;; (times 4 (p (pattern [C4] [_] [G3] [_] [A3] [_] [E3] [_] [F3] [_] [C3] [_] [F3] [_] [G3])))
+  (p [C4])
+  (p [G3])
+  (p [A3])
+  (p [E3])
+  (p [F3])
+  (p [C3])
+  (p [F3])
+  (p [G3])
+
 )
+
 
 (defn setup []
   "Runs once."
