@@ -16,9 +16,9 @@
                 [music-as-data.semantics]
 		[music-as-data.signalsnotes]))
 
-(defn -main
-
-
+(defn -main []
+  (create-notes)
+  (p (pattern [A4 A2]))
 )
 
 (defn setup []
