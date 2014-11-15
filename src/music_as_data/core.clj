@@ -16,6 +16,11 @@
                 [music-as-data.semantics]
 		[music-as-data.signalsnotes]))
 
+(defn -main
+
+
+)
+
 (defn setup []
   "Runs once."
   (swap! *minim* (fn [minim] (Minim. (current-applet))))
