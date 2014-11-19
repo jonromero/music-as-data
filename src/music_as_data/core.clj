@@ -16,6 +16,46 @@
                 [music-as-data.semantics]
 		[music-as-data.signalsnotes]))
 
+(defn -main []
+  (require 'music-as-data.core)
+  (in-ns 'music-as-data.core)
+
+  (defsample hihat "HiHats1/hihat2.wav")
+
+  (create-notes)
+  (p (pattern [(chord A2 E5)]))
+  (p [(chord hihat A3)])
+
+  (defn melody []
+    (p [C4])
+    (p [G3])
+    (p [A3])
+    (p [E3])
+    (p [F3])
+    (p [C3])
+    (p [F3])
+    (p [G3])
+  )
+  ;; (times 4 (p (pattern [C4] [_] [G3] [_] [A3] [_] [E3] [_] [F3] [_] [C3] [_] [F3] [_] [G3])))
+  (times 1 (melody))
+
+  (defn fast_part []
+    (p [C4 C4])
+    (p [D4 B3])
+    (p [C4 E4])
+    (p [G4 G3])
+    (p [A3 F3])
+    (p [E3 G3])
+    (p [F3 C4])
+    (p [B3 G3])
+    (p [C4])
+  )
+
+  (times 2 (fast_part))
+
+)
+
+
 (defn setup []
   "Runs once."
   (swap! *minim* (fn [minim] (Minim. (current-applet))))
